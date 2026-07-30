@@ -1,7 +1,7 @@
 use super::*;
 
 #[repr(C)]
-#[derive(Copy, Clone)]
+#[derive(Copy, Clone, Default)]
 pub(crate) struct FftComplex {
     pub(crate) real: f32,
     pub(crate) imag: f32,

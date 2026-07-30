@@ -49,11 +49,7 @@ extern "C" fn rader(array: *const FftComplexT, target: *mut FftComplexT, logsize
                 (reversed_n = next_reversed_n(reversed_n, shift));
                 break '__c0;
             }
-            {
-                let __p = &mut n;
-                *__p = (*__p).wrapping_add(1);
-                *__p
-            };
+            n = n.wrapping_add(1);
         }
     }
 }
@@ -66,7 +62,7 @@ extern "C" fn fft_raw(x: *mut FftComplexT, logsize: u64) -> () {
     let end: *mut FftComplexT = unsafe { begin.add(((1 as u64) << logsize) as usize) };
     '__b2: loop {
         '__c2: loop {
-            let mut unit: FftComplexT = unsafe { core::mem::zeroed() };
+            let mut unit: FftComplexT = FftComplexT::default();
             '__b3: loop {
                 '__c3: loop {
                     unit.real = unsafe { cos(2 as f64 * 3.141592653589793 / 2 as f64) } as f32;
@@ -85,8 +81,8 @@ extern "C" fn fft_raw(x: *mut FftComplexT, logsize: u64) -> () {
                         break '__b4;
                     }
                     '__c4: loop {
-                        let mut t: FftComplexT = unsafe { core::mem::zeroed() };
-                        let mut u: FftComplexT = unsafe { core::mem::zeroed() };
+                        let mut t: FftComplexT = FftComplexT::default();
+                        let mut u: FftComplexT = FftComplexT::default();
                         '__b5: loop {
                             '__c5: loop {
                                 t = unsafe { *p.add(half as usize) };
@@ -128,7 +124,7 @@ extern "C" fn fft_raw(x: *mut FftComplexT, logsize: u64) -> () {
                         if half as u64 <= 1 as u64 {
                             break '__c4;
                         }
-                        let mut root: FftComplexT = unsafe { core::mem::zeroed() };
+                        let mut root: FftComplexT = FftComplexT::default();
                         '__b9: loop {
                             '__c9: loop {
                                 root = unit;
@@ -219,8 +215,8 @@ extern "C" fn fft_raw(x: *mut FftComplexT, logsize: u64) -> () {
                                             break '__b15;
                                         }
                                     }
-                                    let mut t: FftComplexT = unsafe { core::mem::zeroed() };
-                                    let mut u: FftComplexT = unsafe { core::mem::zeroed() };
+                                    let mut t: FftComplexT = FftComplexT::default();
+                                    let mut u: FftComplexT = FftComplexT::default();
                                     '__b16: loop {
                                         '__c16: loop {
                                             t.real = root.real
@@ -268,14 +264,12 @@ extern "C" fn fft_raw(x: *mut FftComplexT, logsize: u64) -> () {
                                 }
                                 {
                                     {
-                                        let __p = &mut i;
-                                        *__p = (*__p).wrapping_add(1);
-                                        *__p
+                                        i = i.wrapping_add(1);
+                                        i
                                     };
                                     {
-                                        let __p = &mut j;
-                                        *__p = (*__p).wrapping_add(1);
-                                        *__p
+                                        j = j.wrapping_add(1);
+                                        j
                                     }
                                 };
                             }
@@ -300,7 +294,7 @@ extern "C" fn fft_raw(x: *mut FftComplexT, logsize: u64) -> () {
     }
     '__b20: loop {
         '__c20: loop {
-            let mut unit: FftComplexT = unsafe { core::mem::zeroed() };
+            let mut unit: FftComplexT = FftComplexT::default();
             '__b21: loop {
                 '__c21: loop {
                     unit.real = unsafe { cos(2 as f64 * 3.141592653589793 / 4 as f64) } as f32;
@@ -319,8 +313,8 @@ extern "C" fn fft_raw(x: *mut FftComplexT, logsize: u64) -> () {
                         break '__b22;
                     }
                     '__c22: loop {
-                        let mut t: FftComplexT = unsafe { core::mem::zeroed() };
-                        let mut u: FftComplexT = unsafe { core::mem::zeroed() };
+                        let mut t: FftComplexT = FftComplexT::default();
+                        let mut u: FftComplexT = FftComplexT::default();
                         '__b23: loop {
                             '__c23: loop {
                                 t = unsafe { *p.add(half as usize) };
@@ -362,7 +356,7 @@ extern "C" fn fft_raw(x: *mut FftComplexT, logsize: u64) -> () {
                         if half as u64 <= 1 as u64 {
                             break '__c22;
                         }
-                        let mut root: FftComplexT = unsafe { core::mem::zeroed() };
+                        let mut root: FftComplexT = FftComplexT::default();
                         '__b27: loop {
                             '__c27: loop {
                                 root = unit;
@@ -453,8 +447,8 @@ extern "C" fn fft_raw(x: *mut FftComplexT, logsize: u64) -> () {
                                             break '__b33;
                                         }
                                     }
-                                    let mut t: FftComplexT = unsafe { core::mem::zeroed() };
-                                    let mut u: FftComplexT = unsafe { core::mem::zeroed() };
+                                    let mut t: FftComplexT = FftComplexT::default();
+                                    let mut u: FftComplexT = FftComplexT::default();
                                     '__b34: loop {
                                         '__c34: loop {
                                             t.real = root.real
@@ -502,14 +496,12 @@ extern "C" fn fft_raw(x: *mut FftComplexT, logsize: u64) -> () {
                                 }
                                 {
                                     {
-                                        let __p = &mut i;
-                                        *__p = (*__p).wrapping_add(1);
-                                        *__p
+                                        i = i.wrapping_add(1);
+                                        i
                                     };
                                     {
-                                        let __p = &mut j;
-                                        *__p = (*__p).wrapping_add(1);
-                                        *__p
+                                        j = j.wrapping_add(1);
+                                        j
                                     }
                                 };
                             }
@@ -541,7 +533,7 @@ extern "C" fn fft_raw(x: *mut FftComplexT, logsize: u64) -> () {
             '__c38: loop {
                 '__b39: loop {
                     '__c39: loop {
-                        let mut unit: FftComplexT = unsafe { core::mem::zeroed() };
+                        let mut unit: FftComplexT = FftComplexT::default();
                         '__b40: loop {
                             '__c40: loop {
                                 unit.real =
@@ -564,8 +556,8 @@ extern "C" fn fft_raw(x: *mut FftComplexT, logsize: u64) -> () {
                                     break '__b41;
                                 }
                                 '__c41: loop {
-                                    let mut t: FftComplexT = unsafe { core::mem::zeroed() };
-                                    let mut u: FftComplexT = unsafe { core::mem::zeroed() };
+                                    let mut t: FftComplexT = FftComplexT::default();
+                                    let mut u: FftComplexT = FftComplexT::default();
                                     '__b42: loop {
                                         '__c42: loop {
                                             t = unsafe { *p.add(half as usize) };
@@ -615,7 +607,7 @@ extern "C" fn fft_raw(x: *mut FftComplexT, logsize: u64) -> () {
                                     if half as u64 <= 1 as u64 {
                                         break '__c41;
                                     }
-                                    let mut root: FftComplexT = unsafe { core::mem::zeroed() };
+                                    let mut root: FftComplexT = FftComplexT::default();
                                     '__b46: loop {
                                         '__c46: loop {
                                             root = unit;
@@ -718,10 +710,8 @@ extern "C" fn fft_raw(x: *mut FftComplexT, logsize: u64) -> () {
                                                         break '__b52;
                                                     }
                                                 }
-                                                let mut t: FftComplexT =
-                                                    unsafe { core::mem::zeroed() };
-                                                let mut u: FftComplexT =
-                                                    unsafe { core::mem::zeroed() };
+                                                let mut t: FftComplexT = FftComplexT::default();
+                                                let mut u: FftComplexT = FftComplexT::default();
                                                 '__b53: loop {
                                                     '__c53: loop {
                                                         t.real = root.real
@@ -787,14 +777,12 @@ extern "C" fn fft_raw(x: *mut FftComplexT, logsize: u64) -> () {
                                             }
                                             {
                                                 {
-                                                    let __p = &mut i;
-                                                    *__p = (*__p).wrapping_add(1);
-                                                    *__p
+                                                    i = i.wrapping_add(1);
+                                                    i
                                                 };
                                                 {
-                                                    let __p = &mut j;
-                                                    *__p = (*__p).wrapping_add(1);
-                                                    *__p
+                                                    j = j.wrapping_add(1);
+                                                    j
                                                 }
                                             };
                                         }
@@ -861,11 +849,7 @@ extern "C" fn rader_inplace(array: *mut FftComplexT, logsize: u64) -> () {
                 (reversed_n = next_reversed_n(reversed_n, shift));
                 break '__c57;
             }
-            {
-                let __p = &mut n;
-                *__p = (*__p).wrapping_add(1);
-                *__p
-            };
+            n = n.wrapping_add(1);
         }
     }
 }
